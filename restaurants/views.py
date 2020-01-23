@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Item
+from .models import Item, Restaurant
 from .forms import RestaurantForm, ItemForm, SignupForm, SigninForm
 from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
@@ -25,9 +25,9 @@ def signup(request):
     return render(request, 'signup.html', context)
 
 def signin(request):
-    form = LoginForm()
+    form = SigninForm()   #LoginForm() was used which is wrong
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = SigninForm(request.POST) #LoginForm() was used which is wrong
         if form.is_valid():
 
             username = form.cleaned_data['username']
@@ -58,11 +58,11 @@ def restaurant_list(request):
     context = {
        "rest_list": restaurants
     }
-    return render(request, 'restaurant_list.html', context)
+    return render(request, 'list.html', context) #Resturant_list.html was used instead of list.html
 
 
 def restaurant_detail(request, restaurant_id):
-    restaurant = Restaurant.objects.get(id=res_id)
+    restaurant = Restaurant.objects.get(id=restaurant_id) #res_id was used instead of restaurant_id
     items = Item.objects.filter(restaurant=restaurant)
     context = {
         "restaurant": restaurant,

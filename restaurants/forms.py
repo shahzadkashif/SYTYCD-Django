@@ -1,5 +1,5 @@
 from django import forms
-from .models import Restaurant, Item
+from .models import Restaurant, Item #item was not typed
 from django.contrib.auth.models import User
 
 
@@ -23,7 +23,7 @@ class ItemForm(forms.ModelForm):
 class SignupForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['usrname', 'first_name', 'last_name', 'email' ,'password']
+        fields = ['username', 'first_name', 'last_name', 'email' ,'password'] #usrname was wrong
 
         widgets={
         'password': forms.PasswordInput(),
